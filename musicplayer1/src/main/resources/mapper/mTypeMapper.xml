@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mtype.mapper.mTypeMapper">
+    <select id="findAll" resultType="com.mtype.entity.mType">
+        select * from mtype
+    </select>
+
+    <insert id="add" parameterType="com.mtype.entity.mType">
+        insert into mtype values (mtype_seq.nextval,#{tname})
+    </insert>
+
+    <select id="findById" resultType="com.mtype.entity.mType">
+        select * from mtype where t_id=#{t_id}
+    </select>
+
+    <select id="findByName" resultType="int">
+        select count(*) from mtype where tname=#{tname}
+    </select>
+
+    <update id="update" parameterType="com.mtype.entity.mType">
+        update mtype set tname=#{tname} where t_id=#{t_id}
+    </update>
+</mapper>

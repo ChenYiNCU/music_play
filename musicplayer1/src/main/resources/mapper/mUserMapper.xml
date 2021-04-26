@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.muser.mapper.mUserMapper">
+    <resultMap id="followResult" type="com.muser.entity.Follow">
+        <association property="fans" javaType="com.muser.entity.mUser">
+            <result column="u_id" property="u_id"></result>
+            <result column="uname" property="uname"></result>
+            <result column="upwd" property="upwd"></result>
+            <result column="age" property="age"></result>
+            <result column="sex" property="sex"></result>
+            <result column="tel" property="tel"></result>
+            <result column="email" property="email"></result>
+            <result column="des" property="des"></result>
+            <result column="uphoto" property="uphoto"></result>
+            <result column="flag" property="flag"></result>
+        </association>
+        <association property="follows" javaType="com.muser.entity.mUser">
+            <result column="u_id" property="u_id"></result>
+            <result column="uname" property="uname"></result>
+            <result column="upwd" property="upwd"></result>
+            <result column="age" property="age"></result>
+            <result column="sex" property="sex"></result>
+            <result column="tel" property="tel"></result>
+            <result column="email" property="email"></result>
+            <result column="des" property="des"></result>
+            <result column="uphoto" property="uphoto"></result>
+            <result column="flag" property="flag"></result>
+        </association>
+    </resultMap>
+
+    <!--    王晏-->
+    <select id="findAllSinger" resultType="com.muser.entity.mUser">
+        select * from muser where flag=2
+    </select>
+
+    <select id="findPopSingerPage" resultType="com.muser.entity.mUser">
+        <![CDATA[
+                select d.* from (
+                    select c.*,rownum r from (
+                    select m.u_id,m.uname,m.sex,m.uphoto,count(f.fid) as fansNum
+                        from muser m
+                        left join follow f
+                        on m.u_id=f.u_id
+                        where m.flag=2
+                        group by m.u_id,m.uname,m.sex,m.uphoto
+                        order by count(fid) desc
+                    ) c
+                ) d
+            where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+        ]]>
+    </select>
+
+    <select id="singerNum" resultType="int">
+        select count(1) from muser where flag=2
+    </select>
+
+    <select id="searchByName" resultType="com.muser.entity.mUser">
+        select * from muser where flag=2 and uname like '%'||#{uname}||'%'
+    </select>
+
+
+
+    <!--董丽荣-->
+    <select id="login" resultType="com.muser.entity.mUser">
+        select * from muser where tel=#{tel} and upwd=#{upwd}
+    </select>
+    <select id="findByTel" resultType="com.muser.entity.mUser">
+        select * from muser where tel=#{_parameter}
+    </select>
+
+    <insert id="regist" parameterType="com.muser.entity.mUser">
+        insert into muser (u_id,tel,upwd,uname,uphoto,email,age,sex,des,flag) values
+        (muser_seq.nextval,#{tel},#{upwd},#{uname},#{uphoto},#{email},#{age},#{sex},#{des},0)
+    </insert>
+
+    <select id="findAll" resultType="com.muser.entity.mUser">
+        select * from muser
+    </select>
+
+    <select id="findPage" resultType="com.muser.entity.mUser">
+        <![CDATA[
+            select d.* from
+            (select u.*,rownum r from muser u where u.flag=#{flag})d
+            where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+        ]]>
+    </select>
+
+    <select id="countByFlag" resultType="int" parameterType="int">
+        select count(1) from muser where flag=#{flag}
+    </select>
+
+    <delete id="del" parameterType="int">
+        delete from muser where u_id=#{u_id}
+    </delete>
+
+    <select id="findById" parameterType="int" resultType="com.muser.entity.mUser">
+        select * from muser where u_id=#{u_id}
+    </select>
+
+    <!--(u_id,tel,upwd,uname,email,age,sex,des,flag)-->
+    <update id="update" parameterType="com.muser.entity.mUser">
+        update muser set tel=#{tel},upwd=#{upwd},uname=#{uname},email=#{email},age=#{age},sex=#{sex},des=#{des},uphoto=#{uphoto}
+        where u_id=#{u_id}
+    </update>
+
+    <insert id="addUser" parameterType="com.muser.entity.mUser">
+        insert into muser (u_id,tel,upwd,uname,uphoto,email,age,sex,des,flag) values
+        (muser_seq.nextval,#{tel},#{upwd},#{uname},#{uphoto},#{email},#{age},#{sex},#{des},#{flag})
+    </insert>
+
+    <update id="examine">
+        update muser set flag=#{flag} where u_id=#{u_id}
+    </update>
+
+    <update id="freeze">
+        update muser set flag=#{flag} where u_id=#{u_id}
+    </update>
+
+    <select id="findByFlag" resultType="com.muser.entity.mUser">
+        select * from muser where flag=#{flag}
+    </select>
+
+    <sql id="search1">
+        select d.* from
+            (select u.*,rownum r from muser u where u.flag=#{flag}
+    </sql>
+    <sql id="search2">
+        )d
+        <![CDATA[
+            where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+        ]]>
+    </sql>
+    <select id="findSearchPage" resultType="com.muser.entity.mUser">
+        <include refid="search1" />
+        <if test="search!=null and search!=''">
+            and (u.uname like '%'||#{search}||'%' or u.tel like '%'||#{search}||'%' or u.sex like '%'||#{search}||'%')
+        </if>
+        <include refid="search2" />
+    </select>
+
+    <select id="countBySearch" resultType="int">
+        select count(1) from muser where flag=#{flag}
+        <if test="search!=null and search!=''">
+            and (uname like '%'||#{search}||'%' or tel like '%'||#{search}||'%' or sex like '%'||#{search}||'%')
+        </if>
+    </select>
+
+    <select id="countFans" resultType="int" parameterType="int">
+        select count(1) from follow where u_id=#{u_id}
+    </select>
+
+    <select id="countFollows" resultType="int" parameterType="int">
+        select count(1) from follow where fid=#{u_id}
+    </select>
+
+    <select id="findFans" parameterType="int" resultType="com.muser.entity.mUser">
+        select * from muser a where a.u_id in(
+            select f.fid from muser m,follow f where f.u_id=#{u_id} and m.u_id=f.u_id
+        )
+    </select>
+
+    <select id="findFollows" parameterType="int" resultType="com.muser.entity.mUser">
+        select * from muser a where a.u_id in(
+       select f.u_id
+       from muser m,follow f where m.u_id=f.fid and f.fid=#{u_id}
+        )
+    </select>
+
+    <select id="checkFollow" resultType="com.muser.entity.mUser">
+        select b.* from(
+        select a.* from muser a where a.u_id in(
+        select f.u_id
+        from muser m,follow f where m.u_id=f.fid and f.fid=#{nowid}
+        )
+        ) b where b.u_id=#{checkid}
+    </select>
+
+    <update id="edit" parameterType="com.muser.entity.mUser">
+        update muser set tel=#{tel},uname=#{uname},email=#{email},age=#{age},sex=#{sex},des=#{des},uphoto=#{uphoto}
+        where u_id=#{u_id}
+    </update>
+
+    <insert id="follow">
+        insert into follow(u_id,fid)
+        values (#{u_id},#{fid})
+    </insert>
+
+    <delete id="noFollow">
+        delete from follow where u_id=#{u_id} and fid=#{fid}
+    </delete>
+</mapper>

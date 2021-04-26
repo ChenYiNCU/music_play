@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.madmin.mapper.mAdminMapper">
+    <select id="login" resultType="com.madmin.entity.mAdmin">
+            select * from madmin where aname=#{aname} and apwd=#{apwd}
+    </select>
+    <select id="findByName" resultType="com.madmin.entity.mAdmin">
+            select * from madmin where aname=#{_parameter}
+    </select>
+</mapper>

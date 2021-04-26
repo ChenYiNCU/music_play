@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eva.mapper.EvaMapper">
+    <resultMap id="evaResult" type="com.eva.entity.Eva">
+        <result column="eid" property="eid"></result>
+        <result column="etime" property="etime"></result>
+        <result column="content" property="content"></result>
+        <result column="rdisid" property="eid"></result>
+        <result column="rdisname" property="rdisname"></result>
+        <result column="rtime" property="rtime"></result>
+        <result column="rcontent" property="rcontent"></result>
+        <association property="speaker" javaType="com.muser.entity.mUser">
+            <result column="disid" property="u_id"></result>
+            <result column="disname" property="uname"></result>
+
+        </association>
+
+        <association property="music" javaType="com.mplink.entity.Music">
+            <result column="mid" property="mid"></result>
+            <result column="mname" property="mname"></result>
+
+
+        </association>
+    </resultMap>
+
+    <insert id="eva"  parameterType="com.eva.entity.Eva">
+        insert into eva (eid,etime,disid,disname,mid,content)
+         values(eva_seq.nextval,sysdate,#{speaker.u_id},#{speaker.uname},#{music.mid},#{content})
+    </insert>
+    <insert id="reva" parameterType="com.eva.entity.Eva">
+        insert into reva (eid,rdisid,rdisname,rcontent,rtime)
+        values(#{eid},#{rdisid},#{rdisname},#{rcontent},sysdate)
+    </insert>
+
+</mapper>

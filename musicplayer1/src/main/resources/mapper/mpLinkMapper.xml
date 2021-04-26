@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mplink.mapper.mpLinkMapper">
+
+    <resultMap id="music" type="com.mplink.entity.Music">
+        <result column="mid" property="mid"></result>
+        <result column="mname" property="mname"></result>
+        <result column="time" property="time"></result>   <!--上传时间-->
+        <result column="words" property="words"></result>
+        <result column="murl" property="murl"></result>
+        <result column="mvurl" property="mvurl"></result>
+        <result column="mphoto" property="mphoto"></result>
+        <result column="playnum" property="playnum"></result>
+        <result column="likenum" property="likenum"></result>
+        <result column="storenum" property="storenum"></result>
+        <association property="mtype" javaType="com.mtype.entity.mType">
+            <result column="t_id" property="t_id"></result>
+            <result column="tname" property="tname"></result>
+        </association>
+        <association property="singer" javaType="com.muser.entity.mUser">
+            <result column="sid" property="u_id"></result>
+            <result column="sname" property="uname"></result>
+
+        </association>
+        <association property="uploader" javaType="com.muser.entity.mUser">
+            <result column="u_id" property="u_id"></result>
+            <result column="uname" property="uname"></result>
+
+        </association>
+
+    </resultMap>
+    <resultMap id="evaResult" type="com.eva.entity.Eva">
+        <result column="eid" property="eid"></result>
+        <result column="etime" property="etime"></result>
+        <result column="content" property="content"></result>
+        <result column="rdisid" property="rdisid"></result>
+        <result column="rdisname" property="rdisname"></result>
+        <result column="rtime" property="rtime"></result>
+        <result column="rcontent" property="rcontent"></result>
+        <result column="uphoto" property="rphoto"></result>
+        <association property="speaker" javaType="com.muser.entity.mUser">
+            <result column="disid" property="u_id"></result>
+            <result column="disname" property="uname"></result>
+            <result column="disphoto" property="uphoto"></result>
+
+        </association>
+        <association property="music" javaType="com.mplink.entity.Music">
+            <result column="mid" property="mid"></result>   <!--音乐id -->
+
+        </association>
+    </resultMap>
+
+
+    <resultMap id="mplinkResult" type="com.mplink.entity.mpLink">
+        <association property="playlist" javaType="com.mplink.entity.Playlist">
+            <result column="pid" property="pid"></result>
+            <result column="pname" property="pname"></result>
+            <association property="creater" javaType="com.muser.entity.mUser">
+                <result column="u_id" property="u_id"></result>
+                <result column="uname" property="uname"></result>
+                <result column="upwd" property="upwd"></result>
+                <result column="age" property="age"></result>
+                <result column="sex" property="sex"></result>
+                <result column="tel" property="tel"></result>
+                <result column="email" property="email"></result>
+                <result column="des" property="des"></result>
+                <result column="uphoto" property="uphoto"></result>
+                <result column="flag" property="flag"></result>
+            </association>
+        </association>
+        <association property="music" javaType="com.mplink.entity.Music">
+            <result column="mid" property="mid"></result>
+            <result column="mname" property="mname"></result>
+            <result column="time" property="time"></result>
+            <result column="words" property="words"></result>
+            <result column="murl" property="murl"></result>
+            <result column="mvurl" property="mvurl"></result>
+            <result column="mphoto" property="mphoto"></result>
+            <result column="playnum" property="playnum"></result>
+            <result column="likenum" property="likenum"></result>
+            <result column="storenum" property="storenum"></result>
+            <association property="mtype" javaType="com.mtype.entity.mType">
+                <result column="t_id" property="t_id"></result>
+                <result column="tname" property="tname"></result>
+            </association>
+            <association property="singer" javaType="com.muser.entity.mUser">
+                <result column="u_id" property="u_id"></result>
+                <result column="uname" property="uname"></result>
+                <result column="upwd" property="upwd"></result>
+                <result column="age" property="age"></result>
+                <result column="sex" property="sex"></result>
+                <result column="tel" property="tel"></result>
+                <result column="email" property="email"></result>
+                <result column="des" property="des"></result>
+                <result column="uphoto" property="uphoto"></result>
+                <result column="flag" property="flag"></result>
+            </association>
+            <association property="uploader" javaType="com.muser.entity.mUser">
+                <result column="u_id" property="u_id"></result>
+                <result column="uname" property="uname"></result>
+                <result column="upwd" property="upwd"></result>
+                <result column="age" property="age"></result>
+                <result column="sex" property="sex"></result>
+                <result column="tel" property="tel"></result>
+                <result column="email" property="email"></result>
+                <result column="des" property="des"></result>
+                <result column="uphoto" property="uphoto"></result>
+                <result column="flag" property="flag"></result>
+            </association>
+        </association>
+    </resultMap>
+
+    <resultMap id="musicResult" type="com.mplink.entity.Music">
+        <result column="mid" property="mid"></result>
+        <result column="mname" property="mname"></result>
+        <result column="time" property="time"></result>
+        <result column="words" property="words"></result>
+        <result column="murl" property="murl"></result>
+        <result column="mvurl" property="mvurl"></result>
+        <result column="mphoto" property="mphoto"></result>
+        <result column="playnum" property="playnum"></result>
+        <result column="likenum" property="likenum"></result>
+        <result column="storenum" property="storenum"></result>
+        <association property="mtype" javaType="com.mtype.entity.mType">
+            <result column="t_id" property="t_id"></result>
+            <result column="tname" property="tname"></result>
+        </association>
+        <association property="singer" javaType="com.muser.entity.mUser">
+            <result column="u_id" property="u_id"></result>
+            <result column="uname" property="uname"></result>
+            <result column="upwd" property="upwd"></result>
+            <result column="age" property="age"></result>
+            <result column="sex" property="sex"></result>
+            <result column="tel" property="tel"></result>
+            <result column="email" property="email"></result>
+            <result column="des" property="des"></result>
+            <result column="uphoto" property="uphoto"></result>
+            <result column="flag" property="flag"></result>
+        </association>
+        <association property="uploader" javaType="com.muser.entity.mUser">
+            <result column="u_id" property="u_id"></result>
+            <result column="uname" property="uname"></result>
+            <result column="upwd" property="upwd"></result>
+            <result column="age" property="age"></result>
+            <result column="sex" property="sex"></result>
+            <result column="tel" property="tel"></result>
+            <result column="email" property="email"></result>
+            <result column="des" property="des"></result>
+            <result column="uphoto" property="uphoto"></result>
+            <result column="flag" property="flag"></result>
+        </association>
+    </resultMap>
+
+<!--    陈益     -->
+    <select id="searchMusic" resultMap="music">
+<![CDATA[
+select * from (
+        select m.*,m2.*,rownum r from(
+select m.*,m2.uname from
+        (select m.*,m1.uname as sname from music m join muser m1 on m.sid=m1.u_id )m
+        join muser m2 on m.u_id=m2.u_id) m join mtype m2 on m2.t_id=m.tid
+        where mid like '%'||#{search}||'%' or mname like '%'||#{search}||'%'
+        or tname like '%'||#{search}||'%' or tid like '%'||#{search}||'%'
+        or sid like '%'||#{search}||'%' or sname like '%'||#{search}||'%' order by m.mid asc) m
+        where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+
+
+]]>
+    </select>
+    <select id="searchAll" resultType="int">
+select count(1) from(
+                select * from (
+select m.*,m2.uname from
+        (select m.*,m1.uname as sname from music m join muser m1 on m.sid=m1.u_id )m
+        join muser m2 on m.u_id=m2.u_id) m join mtype m2 on m2.t_id=m.tid
+        where mid like '%'||#{search}||'%' or mname like '%'||#{search}||'%'
+        or tname like '%'||#{search}||'%' or tid like '%'||#{search}||'%'
+        or sid like '%'||#{search}||'%' or sname like '%'||#{search}||'%')
+
+    </select>
+
+    <select id="findAllMusic" resultMap="music">
+<![CDATA[
+select * from (
+select m.*,m2.uname from
+        (select m.*,m1.uname as sname,rownum r from music m join muser m1 on m.sid=m1.u_id  order by mid asc)m
+        join muser m2 on m.u_id=m2.u_id order by mid asc) m join mtype m2 on m2.t_id=m.tid
+
+        where r>(#{index}-1)*#{size} and r<=#{index}*#{size}  order by mid asc
+
+]]>
+    </select>
+
+    <select id="sum" resultType="int">
+        select count(1) from music
+    </select>
+
+    <select id="findMusicById" resultMap="music">
+       select * from
+       (select * from (select m2.u_id as sid,m2.uname as sname,m1.mid,m1.u_id,m1.tid,m1.time,m1.mname,m1.mphoto,m1.words,m1.murl,m1.mvurl  from music  m1 join muser m2 on m1.sid=m2.u_id)m1
+       join mtype on mtype.t_id=m1.tid) m1
+join muser m3 on m3.u_id=m1.u_id where m1.mid=#{mid}
+    </select>
+
+    <select id="findEva" resultMap="evaResult">
+        <![CDATA[
+ select * from
+ (select e.*,rownum r from
+ (select e.*,m.uphoto as disphoto from eva e join muser m on m.u_id=e.disid order by e.eid asc) e where e.mid=#{mid} ) e left join
+ (select r.*,m.uphoto from reva r join muser m on m.u_id=r.rdisid)r
+  on r.eid=e.eid
+        where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+        ]]>
+    </select>
+    <select id="findEvaNum" resultType="int">
+        select count(1) from eva where mid=#{mid}
+    </select>
+    <select id="isStar" resultType="int">
+        select count(1) from mplink where pid=#{pid} and mid=#{mid}
+    </select>
+    <insert id="star">
+        insert into mplink values(#{mid},#{pid})
+    </insert>
+    <delete id="noStar">
+        delete from mplink where pid=#{pid} and mid=#{mid}
+    </delete>
+
+    <select id="findPid" resultType="int">
+        select pid from playList where u_id=#{u_id}
+    </select>
+    <select id="isLike" resultType="int">
+        select count(1) from mlike where u_id=#{u_id} and mid=#{mid}
+    </select>
+
+    <insert id="like">
+        insert into mlike values (#{u_id},#{mid})
+    </insert>
+    <delete id="noLike">
+        delete from mlike where u_id=#{u_id} and mid=#{mid}
+    </delete>
+    <delete id="deleteMusic">
+        delete from music where mid=#{mid}
+    </delete>
+    <update id="updateMusic">
+        update music set mphoto=#{mphoto},mname=#{mname},sid=#{singer.u_id},tid=#{mtype.t_id} where mid=#{mid}
+    </update>
+    <update id="starNumUp">
+update music set storenum=storenum+1 where mid=#{mid}
+    </update>
+    <update id="starNumDone">
+ update music set storenum=storenum-1 where mid=#{mid}
+    </update>
+    <update id="likeNumUp">
+ update music set likenum=likenum+1 where mid=#{mid}
+    </update>
+    <update id="likeNumDone">
+        update music set likenum=likenum-1 where mid=#{mid}
+    </update>
+    <insert id="addRecent">
+        insert into recent values (#{mid},#{u_id})
+    </insert>
+    <select id="isRecent" resultType="int">
+        select count(1) from recent where mid=#{mid} and u_id=#{u_id}
+    </select>
+    <update id="playNumUp">
+        update music set playnum=playnum+1 where mid=#{mid}
+    </update>
+
+
+
+<!--    王晏    -->
+    <insert id="add" parameterType="com.mplink.entity.Music">
+        insert into music values(music_seq.nextval,#{mname},#{singer.u_id},#{uploader.u_id},#{mtype.t_id},#{words},#{mphoto},#{murl},#{mvurl},sysdate,0,0,0)
+    </insert>
+
+    <!-- 分页查找 -->
+    <sql id="search1">
+        select d.* from
+               (select m.mid,m.mname,m.mphoto,m.murl,m.mvurl,m.playnum,m.storenum,m.likenum,
+                       rownum r,u.*
+                       from music m,muser u
+                       where m.sid=u.u_id
+    </sql>
+
+    <select id="findSearchPage" resultMap="mplinkResult">
+        <include refid="search1" />
+        <if test="search!=null and search!=''">
+            and (m.mname like '%'||#{search}||'%' or u.uname like '%'||#{search}||'%')
+        </if>
+        <if test="t_id!=-1">
+            and m.tid=#{t_id}
+        </if>
+        <include refid="search2" />
+    </select>
+
+    <sql id="search2">
+        )d
+        <![CDATA[
+            where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+        ]]>
+    </sql>
+
+    <select id="countBySearch" resultType="int">
+        select count(1) from music m,muser u where m.sid=u.u_id
+        <if test="search!=null and search!=''">
+            and (m.mname like '%'||#{search}||'%' or u.uname like '%'||#{search}||'%')
+        </if>
+        <if test="t_id!=-1">
+            and m.tid=#{t_id}
+        </if>
+    </select>
+
+    <select id="findPage" resultMap="mplinkResult">
+		<![CDATA[
+			select e.* from
+                (select d.*,rownum r from
+			        (select m.mid,m.mname,m.mphoto,m.murl,m.mvurl,m.playnum,m.storenum,m.likenum,u.*
+			            from music m,muser u
+                        where m.sid=u.u_id
+                    ) d) e
+			where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+		]]>
+	</select>
+
+    <!-- 分页查所有like降序 -->
+    <select id="findOrderLike" resultType="com.mplink.entity.Music">
+		<![CDATA[
+            select e.* from
+                (select d.*,rownum r from
+			        (select m.* from music m
+			            order by m.likenum desc
+			        ) d) e
+			where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+		]]>
+	</select>
+
+    <!-- 分页查所有store降序 -->
+    <select id="findOrderStore" resultMap="mplinkResult">
+        <![CDATA[
+			select e.* from
+                (select d.*,rownum r from
+                      (select m.mid,m.mname,m.mphoto,m.murl,m.mvurl,m.playnum,m.storenum,m.likenum,m.time,u.*
+                          from music m,muser u
+                            where m.sid=u.u_id
+                            order by m.storenum desc) d) e
+			where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+		]]>
+	</select>
+
+    <!-- 分页查所有playnum降序 -->
+    <select id="findOrderPlay" resultMap="mplinkResult">
+        <![CDATA[
+            select e.* from
+                (select d.*,rownum r from
+                      (select m.mid,m.mname,m.mphoto,m.murl,m.mvurl,m.playnum,m.storenum,m.likenum,m.time,u.*
+                          from music m,muser u
+                            where m.sid=u.u_id
+                            order by m.playnum desc) d) e
+			where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+		]]>
+	</select>
+
+    <!-- 分页查所有time降序 -->
+    <select id="findOrderTime" resultMap="mplinkResult">
+		<![CDATA[
+			select e.* from
+                (select d.*,rownum r from
+                      (select m.mid,m.mname,m.mphoto,m.murl,m.mvurl,m.playnum,m.storenum,m.likenum,m.time,u.*
+                          from music m,muser u
+                            where m.sid=u.u_id
+                            order by time desc) d) e
+			where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+		]]>
+	</select>
+
+    <!-- 分页查所有MV store降序 -->
+    <select id="findMvStore" resultType="com.mplink.entity.Music">
+		<![CDATA[
+			select e.* from
+                (select d.*,rownum r from
+			        (select m.* from music m
+                        where mvurl is not null
+                        order by m.storenum desc
+			        ) d) e
+			where r>(#{index}-1)*#{size} and r<=#{index}*#{size}
+		]]>
+	</select>
+
+    <!-- 音乐总数量-->
+    <select id="mCount" resultType="int">
+        select count(*) from music
+    </select>
+
+    <!-- mv总数量-->
+    <select id="mvCount" resultType="int">
+        select count(*) from music where mvurl is not null
+    </select>
+
+<!--董丽荣-->
+    <select id="findRecent" resultMap="musicResult">
+        <![CDATA[
+            select * from
+            (select m1.*,rownum r from recent r
+            join muser u on u.u_id=r.u_id
+            join (select * from music m
+            left join
+            mtype t on m.tid=t.t_id
+            left join
+            muser s on m.sid=s.u_id)m1 on r.mid=m1.mid
+            where u.u_id=#{u_id} order by m1.playnum desc) where r>0 and r<11
+        ]]>
+    </select>
+
+    <select id="findPlaylist" resultMap="musicResult">
+        select m.* from mplink mp
+        join playlist p on p.pid=mp.pid
+        join music m on m.mid=mp.mid
+        where p.u_id=#{u_id}
+    </select>
+
+    <select id="findLikelist" resultMap="musicResult">
+        select * from mlike l,music m where l.mid=m.mid and l.u_id=#{u_id}
+    </select>
+
+
+</mapper>
