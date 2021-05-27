@@ -1,7 +1,7 @@
 # music_play
 仿网易云的音乐播放网站（vue+node）
 music: 前端工具webstorm, 框架vue
-musicplay1: 后端工具idea,用Java写的接口
+musicplay1: 后端工具idea,框架springboot
 ## 功能结构图
 ![image](https://user-images.githubusercontent.com/47054719/118576456-24da8480-b7bb-11eb-9f9c-e48570c6273d.png)
 ## 部分页面展示
